@@ -7,6 +7,5 @@ import java.util.ArrayList;
  */
 
 public interface StatFileReader {
-    enum Resource {GPS, MobileData, Wifi, SMS, Contacts}
     ArrayList<StatEntry> readFile(String path);
 }

@@ -7,8 +7,16 @@ import java.sql.Timestamp;
  */
 
 public class StatEntry {
+
+    enum Resource {GPS, MobileData, Wifi, SMS, Contacts};
+
+    public static Resource readResourceFromString(String string) {
+        StatEntry.Resource resource=null;
+        return resource;
+    }
+
     private Timestamp timestamp;
     private String app_name;
-    private StatFileReader.Resource resource;
+    private Resource resource;
     private Detail details;
 }
