@@ -24,6 +24,8 @@ public class JsonFileReader implements StatFileReader {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (InvalidEntryException e) {
+            e.display();
         } finally {
             try {
                 if (reader != null) {
@@ -36,7 +38,7 @@ public class JsonFileReader implements StatFileReader {
         return null;
     }
 
-    private ArrayList<StatEntry> readEntryArray(JsonReader reader) throws IOException {
+    private ArrayList<StatEntry> readEntryArray(JsonReader reader) throws IOException, InvalidEntryException {
         ArrayList<StatEntry> statEntries = new ArrayList<StatEntry>();
         reader.beginArray();
         while (reader.hasNext()) {
@@ -46,11 +48,11 @@ public class JsonFileReader implements StatFileReader {
         return statEntries;
     }
 
-    private StatEntry readEntry(JsonReader reader) throws IOException {
+    private StatEntry readEntry(JsonReader reader) throws IOException, InvalidEntryException {
         Timestamp timestamp = null;
         String app_name = null;
         StatEntry.Resource resource = null;
-        Detail details = null;
+        Detail detail = null;
 
         reader.beginObject();
         while (reader.hasNext()) {
@@ -64,11 +66,11 @@ public class JsonFileReader implements StatFileReader {
             } else if (name.equals("detail")) {
                 readDetail(reader);
             } else {
-                System.err.println("Invalid File Entry");
+                throw new InvalidEntryException();
             }
         }
         reader.endObject();
-        return null;
+        return new StatEntry(timestamp, app_name, resource, detail);
     }
 
     private Detail readDetail(JsonReader reader) throws IOException {
