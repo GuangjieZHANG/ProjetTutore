@@ -27,6 +27,22 @@ public class StatEntry {
         return resource;
     }
 
+    public Timestamp getTimestamp() {
+        return timestamp;
+    }
+
+    public String getApp_name() {
+        return app_name;
+    }
+
+    public Resource getResource() {
+        return resource;
+    }
+
+    public Detail getDetails() {
+        return details;
+    }
+
     public String toString() {
         return timestamp.toString() + ": " + app_name + " accessed " + resource.toString() + "(" + details.toString() + ")";
     }
