@@ -24,6 +24,17 @@ public class StatEntry {
 
     public static Resource readResourceFromString(String string) {
         StatEntry.Resource resource=null;
+        if(string.equals("GPS")) {
+            resource = Resource.GPS;
+        } else if (string.equals("MobileData")) {
+            resource = Resource.MobileData;
+        } else if (string.equals("Wifi")) {
+            resource = Resource.Wifi;
+        } else if (string.equals("SMS")) {
+            resource = Resource.SMS;
+        } else if (string.equals("Contacts")) {
+            resource = Resource.Contacts;
+        }
         return resource;
     }
 
